@@ -8,7 +8,7 @@ class Timer extends React.Component {
     
     super(props);
     
-    this.state = { time: 0, x: 0, y: 0 , display:false, incrMovement:1};
+    this.state = { time: 0, x: 0, y: 0 , display:false, incrMovement:5 };
 
     this.handleClick = this.handleClick.bind(this);
     this.myFunction = this.myFunction.bind(this);
@@ -16,7 +16,8 @@ class Timer extends React.Component {
 
   }
   
-  componentDidMount() {
+  componentDidMount() 
+  {
     console.log("this will get executed only once.")
     
   }
@@ -30,6 +31,7 @@ class Timer extends React.Component {
   handleClick(e) {
     this.setState({display:true});
     let timeInterval = setInterval(()=>{ this.setState({time:this.state.time+1}); }, 1000);
+    this.setState({timer:timeInterval});
     document.addEventListener("keydown", this.myFunction);
   };
 
@@ -75,8 +77,14 @@ class Timer extends React.Component {
       {
         this.setState({x:0, y:0});
         this.setState({time:0});
-        this.setState({display:false}); 
-        clearInterval();
+        this.setState({display:false});
+       
+        
+        if(this.state.timer)
+        {
+          console.log('clear interval',this.state.timer); 
+          clearInterval(this.state.timer);
+        }
       }
     }
   }
@@ -85,10 +93,10 @@ class Timer extends React.Component {
   render(){
     return(
       <>
-      {!this.state.display && <button className='ballProvider' onClick={this.handleClick} > Start </button>}
-      {this.state.display && <div className='hole'> </div>}
-      {this.state.display && <div id="Ball" className="ball" style={{  left : this.state.x, top: this.state.y }}  >   </div> }
-      {this.state.display && <div id="Timer" className="timer">  Time:{this.state.time}  </div> }  
+      { <button className='ballProvider' onClick={this.handleClick} > Start </button>}
+      { <div className='hole'> </div>}
+      { <div id="Ball" className="ball" style={{  left : this.state.x, top: this.state.y }}  >   </div> }
+      { <div id="Timer" className="heading-timer">  Time:{this.state.time}  </div> }  
 
      </>);
   }
