@@ -93,7 +93,7 @@ class Timer extends React.Component {
   render(){
     return(
       <>
-      { <button className='ballProvider' onClick={this.handleClick} > Start </button>}
+      { <button  className='startButton' onClick={this.handleClick}  > Start </button> }
       { <div className='hole'> </div>}
       { <div id="Ball" className="ball" style={{  left : this.state.x, top: this.state.y }}  >   </div> }
       { <div id="Timer" className="heading-timer">  Time:{this.state.time}  </div> }  
